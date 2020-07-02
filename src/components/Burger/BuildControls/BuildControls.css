@@ -8,3 +8,12 @@
     margin: auto;
     padding: 10px 0;
 }
+
+.OrderButton{
+color:red;
+}
+
+ .OrderButton:hover, .OrderButton:active {
+    color:blue;
+    background-color: #DAA972;
+}
