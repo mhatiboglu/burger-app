@@ -1,12 +1,12 @@
-import React, {useEffect}from "react";
+import React from "react";
 import classes from "./Modal.css";
-import Aux from "../../../hoc/Aux";
+import Aux from "../../../hoc/Aux/Aux";
 import Backdrop from '../Backdrop/Backdrop'
 
 
 const Modal = React.memo(
   props => {
-  useEffect(() => console.log('it did update'));
+  //useEffect(() => console.log('it did update'));
 
   return (
     <Aux>
