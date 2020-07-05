@@ -80,6 +80,16 @@ class BurgerBuilder extends Component {
   purchaseContinueHAndler = () => {
     alert("You continued");
   };
+  clearHandler = () => {
+    this.setState({
+      ingredients: {
+        salad: 0,
+        bacon: 0,
+        cheese: 0,
+        meat: 0,
+      },
+    });
+  };
 
   render() {
     const disabledInfo = {
@@ -109,6 +119,7 @@ class BurgerBuilder extends Component {
           price={this.state.totalPrice}
           purchasable={this.state.purchasable}
           ordered={this.purchaseHandler}
+          cleared={this.clearHandler}
         />
       </Aux>
     );

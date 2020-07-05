@@ -24,6 +24,13 @@ const buildControls = (props) => (
       />
     ))}
     <button
+      className={classes.ClearButton}
+      disabled={!props.purchasable}
+      onClick={props.cleared}
+    >
+      Clear All
+    </button>
+    <button
       className={classes.OrderButton}
       disabled={!props.purchasable}
       onClick={props.ordered}

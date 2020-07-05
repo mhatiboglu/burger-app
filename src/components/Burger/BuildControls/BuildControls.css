@@ -10,10 +10,25 @@
 }
 
 .OrderButton{
-color:red;
+color:white;
+background-color: green;
+border-radius: 10px;
 }
 
  .OrderButton:hover, .OrderButton:active {
-    color:blue;
-    background-color: #DAA972;
+    color:black;
+    background-color: rgba(0, 128, 0, 0.616);
+    
+}
+
+.ClearButton{
+    background-color: rgb(255, 0, 0);
+    color:white;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+ .ClearButton:hover, .ClearButton:active {
+    color:black;
+    background-color:rgba(255, 0, 0, 0.596);
 }
