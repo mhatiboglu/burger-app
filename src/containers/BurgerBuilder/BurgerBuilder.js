@@ -91,24 +91,26 @@ class BurgerBuilder extends Component {
 
   purchaseContinueHAndler = () => {
     //alert("You continued");
-    this.setState({ loading: true });
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: "john",
-        adress: {
-          street: "crofton",
-          zipCode: "se18 23",
-        },
-        email: "john@john.com",
-        deliveryMethod: "freedelivery",
-      },
-    };
-    axios
-      .post("/orders.json", order)
-      .then((res) => this.setState({ loading: false, purchasing: false }))
-      .catch((err) => this.setState({ loading: false, purchasing: false }));
+
+    // this.setState({ loading: true });
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   customer: {
+    //     name: "john",
+    //     adress: {
+    //       street: "crofton",
+    //       zipCode: "se18 23",
+    //     },
+    //     email: "john@john.com",
+    //     deliveryMethod: "freedelivery",
+    //   },
+    // };
+    // axios
+    //   .post("/orders.json", order)
+    //   .then((res) => this.setState({ loading: false, purchasing: false }))
+    //   .catch((err) => this.setState({ loading: false, purchasing: false }));
+    this.props.history.push("/checkout");
   };
   clearHandler = () => {
     this.setState({
@@ -129,7 +131,11 @@ class BurgerBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
     let orderSummary = null;
-    let burger = this.state ? <p style={{textAlign:'center'}}> Ingredients can't be loaded !</p> : <Spinner />;
+    let burger = this.state ? (
+      <p style={{ textAlign: "center" }}> Ingredients can't be loaded !</p>
+    ) : (
+      <Spinner />
+    );
 
     if (this.state.ingredients) {
       burger = (
