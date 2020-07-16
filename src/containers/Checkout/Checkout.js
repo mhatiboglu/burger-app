@@ -6,12 +6,12 @@ import ContactData from "./ContactData/ContactData";
 class Checkout extends Component {
   state = {
     ingredients: null,
-    totalPrice: null,
+    totalPrice: 0,
   };
   UNSAFE_componentWillMount() {
     const query = new URLSearchParams(this.props.location.search);
     const ingredients = {};
-    let price = null;
+    let price = 0;
     for (let param of query.entries()) {
       if (param[0] === "price") {
         price = param[1];
