@@ -18,44 +18,63 @@ class ContactData extends Component {
           required: true,
         },
         valid: false,
+        touched: false,
       },
       street: {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "Stret",
+          placeholder: "Street",
         },
         value: "",
         validation: {
           required: true,
         },
         valid: false,
+        touched: false,
       },
       zipCode: {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "Zip Code",
+          placeholder: "ZIP Code",
         },
         value: "",
         validation: {
           required: true,
-          minLength:3,
-          maxLength:5,
+          minLength: 5,
+          maxLength: 5,
+          isNumeric: true,
         },
         valid: false,
+        touched: false,
+      },
+      country: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Country",
+        },
+        value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
       },
       email: {
         elementType: "input",
         elementConfig: {
           type: "email",
-          placeholder: "E-mail",
+          placeholder: "Your E-Mail",
         },
-        value: " ",
+        value: "",
         validation: {
           required: true,
+          isEmail: true,
         },
         valid: false,
+        touched: false,
       },
       deliveryMethod: {
         elementType: "select",
@@ -66,6 +85,8 @@ class ContactData extends Component {
           ],
         },
         value: "",
+        validation: {},
+        valid: true,
       },
     },
   };
@@ -91,19 +112,37 @@ class ContactData extends Component {
       })
       .catch((err) => this.setState({ loading: false }));
   };
-  checkValidity = (value, rules) => {
+  checkValidity(value, rules) {
     let isValid = true;
+    if (!rules) {
+      return true;
+    }
+
     if (rules.required) {
       isValid = value.trim() !== "" && isValid;
     }
+
     if (rules.minLength) {
       isValid = value.length >= rules.minLength && isValid;
     }
+
     if (rules.maxLength) {
       isValid = value.length <= rules.maxLength && isValid;
     }
+
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid;
+    }
+
+    if (rules.isNumeric) {
+      const pattern = /^\d+$/;
+      isValid = pattern.test(value) && isValid;
+    }
+
     return isValid;
-  };
+  }
+
   inputChangdHandler = (event, inputIdentifier) => {
     const updatedOrderForm = { ...this.state.orderForm };
     const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
@@ -114,8 +153,9 @@ class ContactData extends Component {
       updatedFormElement.value,
       updatedFormElement.validation
     );
+    updatedFormElement.touched = true;
     console.log(updatedFormElement);
-    
+
     updatedOrderForm[inputIdentifier] = updatedFormElement;
 
     this.setState({ orderForm: updatedOrderForm });
@@ -138,6 +178,7 @@ class ContactData extends Component {
             value={formElement.config.value}
             invalid={!formElement.config.valid}
             shouldValidate={formElement.config.validation}
+            touched={formElement.config.touched}
             key={formElement.id}
             changed={(event) => this.inputChangdHandler(event, formElement.id)}
           />
