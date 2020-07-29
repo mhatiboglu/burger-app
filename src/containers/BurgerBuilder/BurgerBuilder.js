@@ -45,7 +45,7 @@ class BurgerBuilder extends Component {
       .reduce((sum, el) => {
         return sum + el;
       }, 0);
-    return sum > 0 ;
+    return sum > 0;
   };
 
   // addIngredientHandler = (type) => {
@@ -106,20 +106,20 @@ class BurgerBuilder extends Component {
     //   .post("/orders.json", order)
     //   .then((res) => this.setState({ loading: false, purchasing: false }))
     //   .catch((err) => this.setState({ loading: false, purchasing: false }));
-    const queryParams = [];
-    for (let i in this.state.ingredients) {
-      queryParams.push(
-        encodeURIComponent(i) +
-          "=" +
-          encodeURIComponent(this.state.ingredients[i])
-      );
-    }
-    queryParams.push("price=" + this.props.price);
-    const queryString = queryParams.join("&");
-    this.props.history.push({
-      pathname: "/checkout",
-      search: "?" + queryString,
-    });
+
+    //PASSING QUERY PARAMS
+    // const queryParams = [];
+    // for (let i in this.state.ingredients) {
+    //   queryParams.push(
+    //     encodeURIComponent(i) +
+    //       "=" +
+    //       encodeURIComponent(this.state.ingredients[i])
+    //   );
+    // }
+    // queryParams.push("price=" + this.props.price);
+    // const queryString = queryParams.join("&");
+
+    this.props.history.push("/checkout");
   };
   clearHandler = () => {
     this.setState({
@@ -204,8 +204,7 @@ const mapDispatchToProps = (dispatch) => {
         type: actionTypes.REMOVE_INGREDIENT,
         ingredientName: ingName,
       }),
-    onClearAll: () =>
-      dispatch({ type: actionTypes.CLEAR_INGREDIENT}),
+    onClearAll: () => dispatch({ type: actionTypes.CLEAR_INGREDIENT }),
   };
 };
 
